@@ -1,18 +1,41 @@
 // Homescreen.js
 import React from 'react';
-import { Button, View, Text } from 'react-native';
+import { Header } from 'react-native-elements'
+import { Button, View, Text, StyleSheet } from 'react-native';
 
 
-const HomeScreen = ()=>  {
+const HomeScreen = (props)=>  {
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Home Screen</Text>
+      <View>
+      <Header
+      rightComponent={{ icon: 'home', color: '#fff' }}
+      leftComponent={{ icon: 'menu', color: '#fff' }} 
+      />
+      <View>
+        <Text>Velkomin í Smartbox</Text>
           <Button
-          title="Go to About"
-          onPress={() => this.props.navigation.navigate('About')}
+          title="Skrá sendingu"
+          onPress={() => props.navigation.navigate('RegisterDelivery')}
 />
+      </View>
       </View>
     )
   }
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+    },
+    inputContainer: {
+      flex: 1,
+      backgroundColor: '#fff',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    input: {
+      width: 382,
+      height: 48,
+      backgroundColor: '#FBFBFB',
+    }
+  });
 
   export default HomeScreen

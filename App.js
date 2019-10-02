@@ -1,26 +1,31 @@
 // App.js
-import React from 'react';
-import { StyleSheet} from 'react-native';
+import React, {useState} from 'react';
 
 import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
+import { createDrawerNavigator } from 'react-navigation-drawer';
 
 import HomeScreen from './components/HomeScreen';
 import LogInScreen from './components/LogInScreen';
+import RegisterDeliveryScreen from './components/RegisterDeliveryScreen';
 
 
-export default class App extends React.Component {
-  render() {
-    return <AppContainer />;
-  }
+
+export default ()=> { 
+  const [user, setUser] = useState("");
+  const test = "testing"
+  return <AppContainer test = {test} />;
 }
 
-const AppNavigator = createStackNavigator({
+
+const AppNavigator = createDrawerNavigator({
   LogIn: {
-    screen: LogInScreen
+    screen: (props)=> <LogInScreen hi="hello"></LogInScreen>
   },
   Home: {
     screen: HomeScreen
+  },
+  RegisterDelivery: {
+    screen: RegisterDeliveryScreen
   },
  
 },{
@@ -29,11 +34,3 @@ const AppNavigator = createStackNavigator({
 
 const AppContainer = createAppContainer(AppNavigator);
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

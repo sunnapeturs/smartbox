@@ -1,9 +1,10 @@
 import React, { useState} from 'react';
-
 import { StyleSheet, TextInput, View, Button} from 'react-native';
+
 import firebase from '../initFirebase';
 
 const LogIn = (props) =>{
+  console.log(props)
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -36,8 +37,11 @@ const LogIn = (props) =>{
     });
   }
   return (
-    <View style={styles.container}>
+    
+    <View style={styles.container}>     
+     
 
+    <View style={styles.inputContainer}>
       <TextInput placeholder="Netfang" style={styles.input}
       onChangeText={emailValue} value={email} name="email" type="email"/>
 
@@ -47,11 +51,15 @@ const LogIn = (props) =>{
       <Button onPress={signIn} title="skrá inn"/>
 
     </View>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+  },
+  inputContainer: {
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
