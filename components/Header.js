@@ -3,6 +3,11 @@ import { Header } from 'react-native-elements'
 import { Button, View, StyleSheet } from 'react-native';
 
 const HeaderNav = (props)=>  {
+  console.log("now in header");
+  console.log(Object.keys(props));
+  console.log(props);
+  //console.log(props);
+  //console.log(navigation);
   return (
     <View>
       <Header
