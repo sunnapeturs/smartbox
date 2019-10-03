@@ -1,10 +1,10 @@
 import React, { useState} from 'react';
-import { StyleSheet, TextInput, View, Button} from 'react-native';
-
 import firebase from '../initFirebase';
 
+
+import { StyleSheet, TextInput, View, Button} from 'react-native';
+
 const LogIn = (props) =>{
-  console.log(props)
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -14,8 +14,10 @@ const LogIn = (props) =>{
   const passwordValue = (enteredText,) => {
     setPassword(enteredText);
   }
+  
+ 
 
-  const signIn =  () => {
+  const signIn = () => {
     firebase.auth().signInWithEmailAndPassword(email, password)
     .then(user => {
       console.log(user);
@@ -48,6 +50,7 @@ const LogIn = (props) =>{
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {

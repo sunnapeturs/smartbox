@@ -24,7 +24,9 @@ const RegisterDelivery = (props) =>{
   const goBack = () => {
     props.navigation.navigate('Home')
   }
-  
+  const send = () => {
+    props.navigation.navigate('Send')
+  }
 
   return (
     <View>
@@ -52,7 +54,7 @@ const RegisterDelivery = (props) =>{
         name="orderNr" type="text" keyboardType="number-pad" onChangeText={orderNrHandler} value={orderNr}/>
 
         <Button title="Hætta við" onPress={goBack}/>
-        <Button title="senda upplýsingar" />
+        <Button title="senda upplýsingar" onPress={send}/>
       </View>
     </View>
   )

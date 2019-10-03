@@ -1,24 +1,18 @@
-// Homescreen.js
 import React from 'react';
-import Header from './Header';
-import { Button, View, Text, StyleSheet } from 'react-native';
+import { Header } from 'react-native-elements'
+import { Button, View, StyleSheet } from 'react-native';
 
-const HomeScreen = (props)=>  {
+const HeaderNav = (props)=>  {
   return (
     <View>
-      <Header/>
-      <View>
+      <Header
+      rightComponent={{ icon: 'home', color: '#fff' }}
+      leftComponent={{ icon: 'menu', color: '#fff' }} 
+      />
         <Button 
         title="menu"
         onPress={() => props.navigation.toggleDrawer()}
         />
-
-        <Text>Velkomin í Smartbox</Text>
-          <Button
-          title="Skrá sendingu"
-          onPress={() => props.navigation.navigate('RegisterDelivery')}
-          />
-      </View>
     </View>
   )
 }
@@ -39,4 +33,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default HomeScreen
+export default HeaderNav;
