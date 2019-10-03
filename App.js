@@ -9,13 +9,11 @@ import LogInScreen from './components/LogInScreen';
 import RegisterDeliveryScreen from './components/RegisterDeliveryScreen';
 
 
-
 export default ()=> { 
   const [user, setUser] = useState("");
   const test = "testing"
   return <AppContainer test = {test} />;
 }
-
 
 const AppNavigator = createDrawerNavigator({
   LogIn: {
@@ -27,7 +25,6 @@ const AppNavigator = createDrawerNavigator({
   RegisterDelivery: {
     screen: RegisterDeliveryScreen
   },
- 
 },{
     initialRouteName: "LogIn"
 });

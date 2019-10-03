@@ -15,9 +15,7 @@ const LogIn = (props) =>{
     setPassword(enteredText);
   }
 
-
   const signIn =  () => {
-   
     firebase.auth().signInWithEmailAndPassword(email, password)
     .then(user => {
       console.log(user);
@@ -36,21 +34,17 @@ const LogIn = (props) =>{
       console.log(error)
     });
   }
-  return (
-    
+  return ( 
     <View style={styles.container}>     
-     
+      <View style={styles.inputContainer}>
+        <TextInput placeholder="Netfang" style={styles.input}
+        onChangeText={emailValue} value={email} name="email" type="email"/>
 
-    <View style={styles.inputContainer}>
-      <TextInput placeholder="Netfang" style={styles.input}
-      onChangeText={emailValue} value={email} name="email" type="email"/>
+        <TextInput placeholder="Password" style={styles.input}
+        onChangeText={passwordValue} value={password} name="password" type="text"/>
 
-      <TextInput placeholder="Password" style={styles.input}
-      onChangeText={passwordValue} value={password} name="password" type="text"/>
-
-      <Button onPress={signIn} title="skrá inn"/>
-
-    </View>
+        <Button onPress={signIn} title="skrá inn"/>
+      </View>
     </View>
   );
 }
