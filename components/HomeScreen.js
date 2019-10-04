@@ -4,27 +4,16 @@ import Header from './Header';
 import { Button, View, Text, StyleSheet } from 'react-native';
 
 const HomeScreen = (props)=>  {
-  console.log("###############" * 10)
-  console.log("In home screen");
   console.log(Object.keys(props));
   console.log(props);
   return (
     <View>
-
-     {/* <Header navigation={this.props.navigation}/> */}
-     <Header {...props} />
-      <View>
-        <Button 
-        title="menu"
-        onPress={() => props.navigation.toggleDrawer()}
+      <Header {...props}/>
+      <Text>Velkomin í Smartbox</Text>
+        <Button
+        title="Skrá sendingu"
+        onPress={() => props.navigation.navigate('RegisterDelivery')}
         />
-
-        <Text>Velkomin í Smartbox</Text>
-          <Button
-          title="Skrá sendingu"
-          onPress={() => props.navigation.navigate('RegisterDelivery')}
-          />
-      </View>
     </View>
   )
 }

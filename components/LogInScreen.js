@@ -1,12 +1,12 @@
 import React, { useState} from 'react';
 import firebase from '../initFirebase';
 
-
 import { StyleSheet, TextInput, View, Button} from 'react-native';
 
 const LogIn = (props) =>{
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("sunnarun@sunna.is");
+  ///const [password, setPassword] = useState("");
+  const [password, setPassword] = useState("Sunnasunna");
 
   const emailValue = (enteredText) => {
     setEmail(enteredText);
@@ -15,8 +15,6 @@ const LogIn = (props) =>{
     setPassword(enteredText);
   }
   
- 
-
   const signIn = () => {
     firebase.auth().signInWithEmailAndPassword(email, password)
     .then(user => {
@@ -25,7 +23,6 @@ const LogIn = (props) =>{
         fetch('http://localhost:10100/users')
         .then(r=>r.json())
         .then((res)=>{
-            console.log(res);
             console.log("singed in")
             props.navigation.navigate('Home')
         })
@@ -39,10 +36,10 @@ const LogIn = (props) =>{
   return ( 
     <View style={styles.container}>     
       <View style={styles.inputContainer}>
-        <TextInput placeholder="Netfang" style={styles.input}
+        <TextInput  style={styles.input}
         onChangeText={emailValue} value={email} name="email" type="email"/>
 
-        <TextInput placeholder="Password" style={styles.input}
+        <TextInput  style={styles.input}
         onChangeText={passwordValue} value={password} name="password" type="text"/>
 
         <Button onPress={signIn} title="skrá inn"/>
@@ -50,7 +47,6 @@ const LogIn = (props) =>{
     </View>
   );
 }
-
 
 const styles = StyleSheet.create({
   container: {

@@ -1,78 +1,81 @@
 import React, { useState }  from 'react'
-import { Header } from 'react-native-elements'
+import firebase from '../initFirebase';
+import '@firebase/firestore';
+import Header from './Header';
 import { View, Text, StyleSheet,TextInput,Button } from 'react-native';
+
+const db = firebase.firestore();
+
 
 const RegisterDelivery = (props) =>{
 
-  const [fullname, setFullname] = useState('');
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
-  const [orderNr, setOrderNr] = useState('');
+  const [numberOfPackages, setNumberOfPackages] = useState('');
+  const [userid, setUserid] = useState('');
 
-  const nameHandler = (enteredName) => {
-    setFullname(enteredName);
-  }
-  const emailHandler = (enteredEmail) => {
-    setEmail(enteredEmail);
-  }
-  const phoneHandler = (enteredPhone) => {
-    setPhone(enteredPhone);
-  }
-  const orderNrHandler = (enteredOrderNr) => {
-    setOrderNr(enteredOrderNr);
-  }
-  const goBack = () => {
-    props.navigation.navigate('Home')
-  }
-  const send = () => {
-    props.navigation.navigate('Send')
+  console.log("Notandi ",firebase.auth().currentUser.uid)
+
+  db.collection("smartbox").doc(firebase.auth().currentUser.uid).get().then(doc => {
+    const getID = doc.data().userid;
+    setUserid(getID);
+    console.log("firebase id ",getID)
+  })  
+
+  const sendDelivery = ()=> {
+    fetch('http://localhost:3001/post-order', {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        method: 'POST',
+        body: JSON.stringify({
+          name,
+          email,
+          phone,
+          numberOfPackages,
+          userid
+        })
+    })
+    // console.log('gögn send á server')
+    // props.navigation.navigate('Send');
+
+  
+  .then(r=>
+    r.text()
+  )
+  .then(bkey =>{
+    console.log("þetta er key", bkey)
+    props.navigation.navigate('Send',{key:bkey})
+    // props.setBusinessKey(bkey,{})
+  })
+  
   }
 
   return (
     <View>
-      <Header
-      rightComponent={{ icon: 'home', color: '#fff' }}
-      leftComponent={{ icon: 'menu', color: '#fff' }} 
-      />
+      <Header {...props}/>
       <View>
         <Text>Skrá sendingu</Text>
 
         <Text>Viðtakandi:</Text>
-        <TextInput placeholder="Viðtakandi" style={styles.input}
-        name="name" type="text" keyboardType="default" onChangeText={nameHandler} value={fullname}/>
+        <TextInput placeholder="Viðtakandi" style={styles.input} keyboardType="default" onChangeText={setName} value={name}/>
 
         <Text>Email:</Text>
-        <TextInput placeholder="email" style={styles.input}
-        name="email" type="email" keyboardType="email-address" onChangeText={emailHandler} value={email}/>
+        <TextInput placeholder="email" style={styles.input} keyboardType="email-address" onChangeText={setEmail} value={email}/>
         
         <Text>Sími:</Text>
-        <TextInput placeholder="Sími" style={styles.input}
-        name="phone" type="text" keyboardType="phone-pad" onChangeText={phoneHandler} value={phone}/>
+        <TextInput placeholder="Sími" style={styles.input} keyboardType="phone-pad" onChangeText={setPhone} value={phone}/>
 
         <Text>Sendingar númer:</Text>
-        <TextInput placeholder="Sendingarnúmer" style={styles.input}
-        name="orderNr" type="text" keyboardType="number-pad" onChangeText={orderNrHandler} value={orderNr}/>
+        <TextInput placeholder="Sendingarnúmer" style={styles.input} keyboardType="default" onChangeText={setNumberOfPackages} value={numberOfPackages}/>
 
-        <Button title="Hætta við" onPress={goBack}/>
-        <Button title="senda upplýsingar" onPress={send}/>
+        <Button title="senda upplýsingar" onPress={sendDelivery}/>
       </View>
     </View>
   )
 }
-
-// {
-//   "senderOrderID": "77777777",
-//   "description": "hhhhh",
-//   "senderId": 9,
-//   "numberOfPackages": 1,
-//   "pickupAtDeliveryBranch": true,
-//   "box": false,
-//   "location": "hilla",
-//   "recipient": { "email": "eee@eee.is",
-//                   "phone": "7777777",
-//                   "name": "Testari"
-//                 }
-// }
 
 const styles = StyleSheet.create({
   container: {

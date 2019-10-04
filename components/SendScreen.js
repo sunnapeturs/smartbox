@@ -2,10 +2,17 @@
 import React from 'react';
 import { Header } from 'react-native-elements'
 import { View, Text, StyleSheet } from 'react-native';
+import Barcode from 'react-native-barcode-builder';
 
 
 const sendScreen = (props)=>  {
+
+  const businessKey = props.navigation.state.params.key;
+  console.log(businessKey)
+//<barcode> value={buisnessKey}</barcode>
   return (
+
+
     <View>
       <Header
       rightComponent={{ icon: 'home', color: '#fff' }}
@@ -13,6 +20,7 @@ const sendScreen = (props)=>  {
       />
       <View>
         <Text>Sending tókst</Text>
+        <Barcode value={businessKey} text={businessKey} format="CODE128" />
       </View>
     </View>
   )
