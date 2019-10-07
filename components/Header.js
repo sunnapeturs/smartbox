@@ -2,16 +2,15 @@ import React from 'react';
 import { Header } from 'react-native-elements'
 import { View, Text, StyleSheet } from 'react-native';
 
-
 const HeaderNav = (props)=>  {
 
   return (
     <View>
       <Header
-      rightComponent={{ icon: 'menu', onPress:() => props.navigation.toggleDrawer(), color: '#fff' }}
+      rightComponent={{ icon: 'menu',size: 40, onPress:() => props.navigation.toggleDrawer(), color: '#0A9E9C' }}
       leftComponent={<Text style={styles.bold} >BOX</Text>}
       containerStyle={{
-        backgroundColor: '#0A9E9C',
+        backgroundColor: '#fff',
       }} 
       />
     </View>
@@ -20,7 +19,7 @@ const HeaderNav = (props)=>  {
 const styles = StyleSheet.create({
   bold: {
     fontSize: 24,
-    color: '#fff',
+    color: '#0A9E9C',
     fontWeight: 'bold',
   },
   inputContainer: {
